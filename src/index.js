@@ -27,13 +27,34 @@ main()
   });
 
 
-  app.get("/",(req,res)=>{
-    return res.json({
-      status:'success',
-      code:200,
-      message:"Welcome to Referral API"
-    })
-  })
+  app.get("/", (req, res) => {
+    const message = {
+          status: "success",
+          code: 200,
+          message: "Welcome To Accredian Referral Backend",
+          data: prisma.$isConnected ? "Connected to MySQL" : "Not connected to MySQL"
+    };
+
+    const htmlResponse = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accredian API</title>
+      </head>
+      <body style="font-family: 'Arial', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100vh;">
+        <div style="text-align: center; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+          <h1 style="color: #333333;">Welcome to Referral Backend👋</h1>
+          <b>${message.data}</b>
+          <p style="color: #666666;">This is the first Landing Page to <b>Referral Backend Project!</b></p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    res.send(htmlResponse);
+});
 
   // async function hell(){
     
@@ -51,3 +72,5 @@ main()
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports=app;
