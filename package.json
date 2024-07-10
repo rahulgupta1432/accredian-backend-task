@@ -6,7 +6,8 @@
       "dev": "node src/index.js",
       "build": "prisma generate",
       "start": "node src/index.js",
-      "postinstall": "prisma generate"
+      "postinstall": "prisma generate",
+      "start":"npx prisma generate"
     },  
     "dependencies": {
       "@prisma/client": "^3.0.0",
