@@ -5,3 +5,31 @@ npx prisma migrate dev --name init
 <!-- this command for the particular tables -->
 npx prisma migrate
 <!-- this command for all tables -->
+
+<!-- here is project flow -->
+accredian-backend-task/
+│
+├── prisma/
+│   ├── migrations/
+│   │   ├── ...
+│   │
+│   ├── schema.prisma
+│
+├── src/
+│   ├── controllers/
+│   │   ├── referralController.js
+│   │
+│   ├── routes/
+│   │   ├── referralRoutes.js
+│   │
+│   ├── utils/
+│   │   ├── email.js
+│   │
+│   ├── index.js
+│
+├── .env
+├── .env.sample
+├── .gitignore
+├── package.json
+├── README.md
+└── ...
