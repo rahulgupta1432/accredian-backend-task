@@ -33,3 +33,7 @@ accredian-backend-task/
 ├── package.json
 ├── README.md
 └── ...
+
+
+here is go with database url
+DATABASE_URL=mysql://username:password@host:port/database_name
