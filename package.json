@@ -4,11 +4,11 @@
     "main": "src/index.js",
     "scripts": {
       "dev": "nodemon src/index.js",
+      "build": "prisma generate",
       "start": "node src/index.js",
       "prisma": "prisma",
-      "postinstall": "prisma generate",
-      "migrate": "prisma migrate deploy",
-      "build": "prisma generate"
+      "postinstall": "npx prisma/prisma generate",
+      "migrate": "prisma migrate deploy"
       },
     "dependencies": {
       "@prisma/client": "^3.0.0",

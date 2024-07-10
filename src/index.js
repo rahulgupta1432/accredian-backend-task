@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 const referralRoutes = require('./routes/referralRoutes');
-
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,38 +11,37 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api",referralRoutes);
-
+app.use("/api", referralRoutes);
 
 async function main() {
-  await prisma.$connect();
-  console.log('Connected to database');
+  try {
+    await prisma.$connect();
+    console.log('Connected to database');
+  } catch (e) {
+    console.error('Database connection error:', e);
+    process.exit(1);
+  }
 }
 
-main()
-  .catch((e) => {
-      throw e;
-  })
-  .finally(async () => {
-      await prisma.$disconnect();
-  });
+main();
 
-
-  app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  try {
+    await prisma.$connect();
     const message = {
-          status: "success",
-          code: 200,
-          message: "Welcome To Accredian Referral Backend",
-          data: prisma.$isConnected ? "Connected to MySQL" : "Not connected to MySQL"
+      status: "success",
+      code: 200,
+      message: "Welcome To Accredian Referral Backend",
+      data: "Connected to MySQL",
     };
-
+    await prisma.$disconnect();
     const htmlResponse = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accredian API</title>
+        <title>Referral Backend</title>
       </head>
       <body style="font-family: 'Arial', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100vh;">
         <div style="text-align: center; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
@@ -53,24 +52,15 @@ main()
       </body>
       </html>
     `;
-
     res.send(htmlResponse);
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+    res.status(500).json({ message: 'Failed to connect to MySQL' });
+  }
 });
-  // async function hell(){
-    
-  //   const referral = await prisma.referral.create({
-  //     data: {
-  //       referee: 'rahul', // Replace with dynamic value: refereeName
-  //       referrer: 'rahul', // Replace with dynamic value: referrerName
-  //     },
-  //   });
-  //   console.log("inside",referral)
-  // }
-  // hell();
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports=app;
+module.exports = app;
