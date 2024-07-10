@@ -27,6 +27,13 @@ main()
   });
 
 
+  app.get("/",(req,res)=>{
+    return res.json({
+      status:'success',
+      code:200,
+      message:"Welcome to Referral API"
+    })
+  })
 
   // async function hell(){
     
