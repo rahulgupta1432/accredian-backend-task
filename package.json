@@ -6,8 +6,9 @@
       "dev": "nodemon src/index.js",
       "start": "node src/index.js",
       "prisma": "prisma",
-      "postinstall": "prisma generate"
-    },
+      "postinstall": "prisma generate",
+      "migrate": "prisma migrate deploy"
+      },
     "dependencies": {
       "@prisma/client": "^3.0.0",
       "cors": "^2.8.5",

@@ -5,7 +5,6 @@ const { sendReferralEmail } = require('../utils/email');
 
 const createReferral = async (req, res) => {
     const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
-
     try {
       
         const referral = await prisma.referral.create({

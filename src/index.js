@@ -4,6 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const referralRoutes = require('./routes/referralRoutes');
 
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
