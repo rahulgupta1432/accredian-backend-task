@@ -13,7 +13,7 @@ async function sendReferralEmail(referrerName, referrerEmail, refereeName, refer
         console.log('Credentials obtained, sending message...');
 
         let message = {
-            from: `"Sender Name" <${process.env.EMAIL_USER}>`,
+            from: `"Accredian" <${process.env.EMAIL_USER}>`,
             to: refereeEmail,
             subject: 'Referral Invitation',
             text: `${referrerName} has referred you to join our platform.`,
