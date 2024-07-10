@@ -56,7 +56,6 @@ main()
 
     res.send(htmlResponse);
 });
-
   // async function hell(){
     
   //   const referral = await prisma.referral.create({
